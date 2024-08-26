@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #score {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Number (Enter 1 to 10 Only)</h1>
+    <input id="guessnumber" type="number" min="1" max="10">
+    <button onclick="check()">Check</button>
+    <p id="result">You are wrong/Right</p>
+    <p id="score">Score: 10</p>
+
+    <script>
+        var guessnumber = document.getElementById("guessnumber");
+        var result = document.getElementById("result");
+        var scoreElement = document.getElementById("score");
+        var totalscore = 10;
+        var randomnumber = Math.floor(Math.random() * 10) + 1;
+
+        function check() {
+            var enterednumber = Number(guessnumber.value);
+
+            if (randomnumber === enterednumber) {
+                result.textContent = "YOUR GUESS IS RIGHT";
+                alert("YOU WON....");
+                resetGame();
+            } else {
+                totalscore -= 1;
+                scoreElement.textContent = "Score: " + totalscore;
+                result.textContent = "NOT A CORRECT";
+
+                if (totalscore <= 0) {
+                    alert("Game Over!");
+                    resetGame();
+                }
+            }
+        }
+
+        function resetGame() {
+            randomnumber = Math.floor(Math.random() * 10) + 1;
+            totalscore = 10;
+            scoreElement.textContent = "Score: " + totalscore;
+            guessnumber.value = '';
+            result.textContent = "You are wrong/Right";
+        }
+    </script>
+</body>
+</html>
